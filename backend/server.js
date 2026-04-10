@@ -16,14 +16,14 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://whispr-frontend-tkm3.onrender.com"
+  "https://whispr-tester-frontend.onrender.com",
 ];
 
 app.use(
   cors({
     origin: allowedOrigins,
     credentials: true,
-  })
+  }),
 );
 
 app.use(express.json()); //to accept json data
@@ -87,7 +87,7 @@ io.on("connection", (socket) => {
     if (!chat?.users || !newmessagereceived?.sender) {
       console.log(
         "Invalid message received:",
-        JSON.stringify(newmessagereceived, null, 2)
+        JSON.stringify(newmessagereceived, null, 2),
       );
       return;
     }
