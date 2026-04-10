@@ -22,8 +22,8 @@ function Mychats({ fetchagain }) {
       };
 
       const { data } = await axios.get(
-        "https://whispr-backend-rr1w.onrender.com/api/chat",
-        config
+        "https://whispr-tester-backend.onrender.com/api/chat",
+        config,
       );
       // console.log(data);
 

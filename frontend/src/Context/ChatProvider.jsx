@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 
-const ENDPOINT = "https://whispr-backend-rr1w.onrender.com";
+const ENDPOINT = "https://whispr-tester-backend.onrender.com";
 var socket; // Socket as a provider-level singleton
 const ChatContext = createContext();
 

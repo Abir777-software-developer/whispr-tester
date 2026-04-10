@@ -44,17 +44,18 @@ function Drawermodal({ user, children }) {
         },
       };
       const { data } = await axios.get(
-        `https://whispr-backend-rr1w.onrender.com/api/user?search=${search}`,
-        config
+        `https://whispr-tester-backend.onrender.com/api/user?search=${search}`,
+        config,
       );
       setloading(false);
       setsearches(data);
     } catch (error) {
       toaster.create({
         title: "Error Occured!!",
-        description: error.response?.status === 429 
-          ? error.response.data.message 
-          : "failed to load the search results",
+        description:
+          error.response?.status === 429
+            ? error.response.data.message
+            : "failed to load the search results",
         type: "warning",
         duration: 5000,
       });
@@ -72,9 +73,9 @@ function Drawermodal({ user, children }) {
         },
       };
       const { data } = await axios.post(
-        "https://whispr-backend-rr1w.onrender.com/api/chat",
+        "https://whispr-tester-backend.onrender.com/api/chat",
         { userId },
-        config
+        config,
       );
       if (!Chats.find((c) => c._id === data._id)) setChats([data, ...Chats]);
       setSelectedChat(data);

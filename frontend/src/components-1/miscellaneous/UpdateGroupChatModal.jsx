@@ -64,12 +64,12 @@ function UpdateGroupChatModal({ fetchagain, setfetchagain, fetchMessages }) {
         },
       };
       const { data } = await axios.put(
-        "https://whispr-backend-rr1w.onrender.com/api/chat/groupadd",
+        "https://whispr-tester-backend.onrender.com/api/chat/groupadd",
         {
           chatId: selectedChat._id,
           userId: user1._id,
         },
-        config
+        config,
       );
       setSelectedChat(data);
       setfetchagain(!fetchagain);
@@ -101,12 +101,12 @@ function UpdateGroupChatModal({ fetchagain, setfetchagain, fetchMessages }) {
         },
       };
       const { data } = await axios.put(
-        "https://whispr-backend-rr1w.onrender.com/api/chat/groupremove",
+        "https://whispr-tester-backend.onrender.com/api/chat/groupremove",
         {
           chatId: selectedChat._id,
           userId: user1._id,
         },
-        config
+        config,
       );
 
       user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
@@ -134,12 +134,12 @@ function UpdateGroupChatModal({ fetchagain, setfetchagain, fetchMessages }) {
         },
       };
       const { data } = await axios.put(
-        "https://whispr-backend-rr1w.onrender.com/api/chat/rename",
+        "https://whispr-tester-backend.onrender.com/api/chat/rename",
         {
           chatId: selectedChat._id,
           chatName: groupChatName,
         },
-        config
+        config,
       );
 
       setSelectedChat(data);
@@ -170,8 +170,8 @@ function UpdateGroupChatModal({ fetchagain, setfetchagain, fetchMessages }) {
         },
       };
       const { data } = await axios.get(
-        `https://whispr-backend-rr1w.onrender.com/api/user?search=${search}`,
-        config
+        `https://whispr-tester-backend.onrender.com/api/user?search=${search}`,
+        config,
       );
       //   console.log(data);
       setLoading(false);

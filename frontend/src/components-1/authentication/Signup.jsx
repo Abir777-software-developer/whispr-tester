@@ -86,9 +86,9 @@ function Signup() {
         },
       };
       const { data } = await axios.post(
-        "https://whispr-backend-rr1w.onrender.com/api/user",
+        "https://whispr-tester-backend.onrender.com/api/user",
         { name, email, password, pic },
-        config
+        config,
       );
 
       // console.log(data);
@@ -107,9 +107,10 @@ function Signup() {
     } catch (error) {
       toaster.create({
         title: "Error occured",
-        description: error.response?.status === 429 
-          ? error.response.data.message 
-          : (error.response?.data?.message || "something went wrong"),
+        description:
+          error.response?.status === 429
+            ? error.response.data.message
+            : error.response?.data?.message || "something went wrong",
         type: "error",
         duration: 5000,
       });

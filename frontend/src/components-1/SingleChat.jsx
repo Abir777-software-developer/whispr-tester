@@ -16,7 +16,7 @@ import animationData from "../animations/ani.json";
 import CatchMeUpModal from "./miscellaneous/CatchMeUpModal.jsx";
 import { LuSparkles } from "react-icons/lu";
 
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "https://whispr-tester-backend.onrender.com";
 // const ENDPOINT = "https://whispr-backend-rr1w.onrender.com";
 function SingleChat({ fetchagain, setfetchagain }) {
   const {
@@ -65,7 +65,7 @@ function SingleChat({ fetchagain, setfetchagain }) {
 
       const { data } = await axios.get(
         `${ENDPOINT}/api/message/${selectedChat._id}`,
-        config
+        config,
       );
       // console.log(messages);
 
@@ -98,13 +98,13 @@ function SingleChat({ fetchagain, setfetchagain }) {
     if (selectedChatCompareRef.current) {
       localStorage.setItem(
         `whispr_lastSeen_${selectedChatCompareRef.current._id}_${user._id}`,
-        new Date().toISOString()
+        new Date().toISOString(),
       );
     }
 
     // 2. Load lastSeen time for the NEW chat and fetch messages
     const storedLastSeen = localStorage.getItem(
-      `whispr_lastSeen_${selectedChat?._id}_${user._id}`
+      `whispr_lastSeen_${selectedChat?._id}_${user._id}`,
     );
     setLastSeenTime(storedLastSeen);
     setMissedCount(0); // Reset count
@@ -116,23 +116,25 @@ function SingleChat({ fetchagain, setfetchagain }) {
       if (selectedChatCompareRef.current) {
         localStorage.setItem(
           `whispr_lastSeen_${selectedChatCompareRef.current._id}_${user._id}`,
-          new Date().toISOString()
+          new Date().toISOString(),
         );
       }
     };
   }, [selectedChat, user._id]);
 
-
   // Handle missed message count calculation
   useEffect(() => {
     // 2. Only calculate if there are messages AND they belong to the current selectedChat
     if (messages.length > 0 && lastSeenTime && selectedChat) {
-      const messagesBelongToChat = messages.every(m => m.Chat?._id === selectedChat._id || m.Chat === selectedChat._id);
-      
+      const messagesBelongToChat = messages.every(
+        (m) => m.Chat?._id === selectedChat._id || m.Chat === selectedChat._id,
+      );
+
       if (messagesBelongToChat) {
         const lastSeenDate = new Date(lastSeenTime);
         const missed = messages.filter(
-          (m) => new Date(m.createdAt) > lastSeenDate && m.sender._id !== user._id
+          (m) =>
+            new Date(m.createdAt) > lastSeenDate && m.sender._id !== user._id,
         );
         setMissedCount(missed.length);
       } else {
@@ -163,7 +165,7 @@ function SingleChat({ fetchagain, setfetchagain }) {
           chatId: selectedChat._id,
           since: lastSeenTime,
         },
-        config
+        config,
       );
 
       setSummary(data.summary);
@@ -171,11 +173,14 @@ function SingleChat({ fetchagain, setfetchagain }) {
 
       // Update lastSeen so the banner disappears after summarizing
       const now = new Date().toISOString();
-      localStorage.setItem(`whispr_lastSeen_${selectedChat._id}_${user._id}`, now);
+      localStorage.setItem(
+        `whispr_lastSeen_${selectedChat._id}_${user._id}`,
+        now,
+      );
       setMissedCount(0);
     } catch (error) {
       let errorMessage = "Summarizer model is waking up, try few times later";
-      
+
       // If it's a rate limit error (429), use the backend's specific message
       if (error.response?.status === 429) {
         errorMessage = error.response.data.message;
@@ -189,7 +194,6 @@ function SingleChat({ fetchagain, setfetchagain }) {
       setIsSummaryOpen(false);
       setSummaryLoading(false);
     }
-
   };
 
   // console.log(notification, "-------");
@@ -240,7 +244,7 @@ function SingleChat({ fetchagain, setfetchagain }) {
             content: newmessage,
             chatId: selectedChat._id,
           },
-          config
+          config,
         );
         // console.log(data);
 

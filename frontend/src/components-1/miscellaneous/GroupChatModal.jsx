@@ -41,8 +41,8 @@ function GroupChatModal({ children }) {
         },
       };
       const { data } = await axios.get(
-        `https://whispr-backend-rr1w.onrender.com/api/user?search=${search}`,
-        config
+        `https://whispr-tester-backend.onrender.com/api/user?search=${search}`,
+        config,
       );
       //   console.log(data);
       setLoading(false);
@@ -72,12 +72,12 @@ function GroupChatModal({ children }) {
         },
       };
       const { data } = await axios.post(
-        "https://whispr-backend-rr1w.onrender.com/api/chat/group",
+        "https://whispr-tester-backend.onrender.com/api/chat/group",
         {
           name: groupChatName,
           users: JSON.stringify(selectedUsers.map((u) => u._id)),
         },
-        config
+        config,
       );
       setChats([data, ...Chats]);
       toaster.create({
@@ -108,7 +108,7 @@ function GroupChatModal({ children }) {
   };
   const handleDelete = (deleteduser) => {
     setSelectedUsers(
-      selectedUsers.filter((sel) => sel._id !== deleteduser._id)
+      selectedUsers.filter((sel) => sel._id !== deleteduser._id),
     );
   };
 

@@ -33,9 +33,9 @@ function Login() {
         },
       };
       const { data } = await axios.post(
-        "https://whispr-backend-rr1w.onrender.com/api/user/login",
+        "https://whispr-tester-backend.onrender.com/api/user/login",
         { name, password },
-        config
+        config,
       );
       toaster.create({
         description: "Login successful",
@@ -53,9 +53,10 @@ function Login() {
     } catch (error) {
       toaster.create({
         title: "Error occured",
-        description: error.response?.status === 429 
-          ? error.response.data.message 
-          : (error.response?.data?.message || "something went wrong"),
+        description:
+          error.response?.status === 429
+            ? error.response.data.message
+            : error.response?.data?.message || "something went wrong",
         type: "error",
         duration: 5000,
       });
