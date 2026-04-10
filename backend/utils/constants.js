@@ -1,1 +1,1 @@
-export const DB_NAME = "WHisp-r";
+export const DB_NAME = "WHispr-tester";
