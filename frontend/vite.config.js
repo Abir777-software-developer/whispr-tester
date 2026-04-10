@@ -7,10 +7,10 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://whispr-backend-rr1w.onrender.com",
+        target: "https://whispr-tester-backend.onrender.com",
         changeOrigin: true,
         secure: false,
-      }
+      },
     },
   },
 });
